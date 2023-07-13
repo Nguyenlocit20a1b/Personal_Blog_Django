@@ -1,0 +1,287 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+</head>
+  <body id="page-top" class="index container-fluid" style="padding-left: 0px;">
+        <nav class="nav-main">
+          <div class="btn-toggle-nav" onclick="toggleNav()">
+            <div class="btn-x" style = "width: 215px ; height: 60px">
+              <img src="{% static 'images/Nguyen.png' %}" alt="">
+            </div>
+          </div>
+          <ul>
+            <li><a href="{%url 'home'%}">Home</a></li>
+            <li><a href="{%url 'portfolio'%}">Portfolio</a></li>
+            <li><a href="{%url 'about'%}">About</a></li>
+            <li><a href="{%url 'blog-home'%}">Blog</a></li>
+            {% comment %} <li><a href="{%url 'contact'%}">Contact</a></li> {% endcomment %}
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'profile' %}" id="auth-links">Profile</li>
+            <li><a href="{% url 'logout' %}"  id="auth-links">Logout</li>
+            {% else %}
+            <li><a href="{% url 'login' %}" id="auth-links">Login</li>
+            <li><a href="{% url 'register' %}">Register</li>
+            {% endif %}
+    
+          </ul>
+        </nav>
+        <div class="container">
+        <div class="col-md-2">
+        <div class="nav-sidebar-s">
+          <ul>
+            <li><span>Sidebar</span></li>
+            <li><a href="{%url 'about'%}">About</a></li>
+            <li><a href="{%url 'blog-home'%}">Blog</a></li>
+            <li><a href="{%url 'portfolio'%}">Portfolio</a></li>
+            <li><a href="/admin">Admin</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{%url 'create-post'%}">Create</a></li>
+            {% endif %}
+    
+          </ul>
+        </div>
+       </div>
+        <div class="container" style="padding-top:80px;">
+          {% block content %}
+
+          {% endblock %}
+       </div>
+      </div>
+    <!-- Footer -->
+<footer class="page-footer font-small special-color-dark pt-4  bg-dark">
+
+  <!-- Footer Elements -->
+  <div class="container">
+
+    <!--Grid row-->
+    <div class="row">
+
+      <!--Grid column-->
+      <div class="col-md-6 mb-4">
+
+        <!-- Form -->
+        <form class="form-inline">
+          <input class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search"
+            aria-label="Search">
+          <i class="fas fa-search" aria-hidden="true"></i>
+        </form>
+        <!-- Form -->
+
+      </div>
+      <!--Grid column-->
+
+      <!--Grid column-->
+      <div class="col-md-6 mb-4">
+
+        <form class="input-group">
+          <input type="text" class="form-control form-control-sm" placeholder="Your email"
+            aria-label="Your email" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-sm btn-outline-white my-0" type="button">Sign up</button>
+          </div>
+        </form>
+
+      </div>
+      <!--Grid column-->
+
+    </div>
+    <!--Grid row-->
+
+  </div>
+  <!-- Footer Elements -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="/"> MDBootstrap.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+  
+
+    <!-- jQuery Version 1.11.0 -->
+
+    <script >
+      let toggleNavStatus = false;
+
+// Open and close nav
+let toggleNav = function() {
+  let getSidebar = document.querySelector(".nav-sidebar-s");
+  let getSidebarUl = document.querySelector(".nav-sidebar-s ul");
+  let getSidebarTitle = document.querySelector(".nav-sidebar-s span");
+  let getSidebarLink = document.querySelectorAll(".nav-sidebar-s a");
+  
+  // Check if sidebar is closed
+  if (toggleNavStatus === false) {
+    getSidebarUl.style.visibility = "visible";
+    getSidebar.style.width = "215px";
+    getSidebarTitle.style.opacity = "0.5";
+
+    let arrayLength = getSidebarLink.length;
+    for(let i = 0; i < arrayLength; i++) {
+      getSidebarLink[i].style.opacity = "1";
+    }
+    
+    toggleNavStatus = true;
+    
+  }
+
+  // Check if sidebar is open
+  else if (toggleNavStatus === true) {
+    getSidebar.style.width = "50px";
+    getSidebarTitle.style.opacity = "0";
+
+    let arrayLength = getSidebarLink.length;
+    for(let i = 0; i < arrayLength; i++) {
+      getSidebarLink[i].style.opacity = "0";
+    }
+    
+    getSidebarUl.style.visibility = "hidden";
+    toggleNavStatus = false;
+    
+  }  
+
+}
+    </script>
+    
+    <script src="https://raw.githubusercontent.com/IronSummitMedia/startbootstrap/gh-pages/templates/agency/js/jquery-1.11.0.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://raw.githubusercontent.com/IronSummitMedia/startbootstrap/gh-pages/templates/agency/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="https://raw.githubusercontent.com/IronSummitMedia/startbootstrap/gh-pages/templates/agency/js/classie.js"></script>
+    <script src="https://raw.githubusercontent.com/IronSummitMedia/startbootstrap/gh-pages/templates/agency/js/cbpAnimatedHeader.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="https://raw.githubusercontent.com/IronSummitMedia/startbootstrap/gh-pages/templates/agency/js/jqBootstrapValidation.js"></script>
+    <script src="https://raw.githubusercontent.com/IronSummitMedia/startbootstrap/gh-pages/templates/agency/js/contact_me.js"></script>
+
+    <span style="height: 20px; width: 40px; min-height: 20px; min-width: 40px; position: absolute; opacity: 0.85; z-index: 8675309; display: none; cursor: pointer; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAUCAYAAAD/Rn+7AAADU0lEQVR42s2WXUhTYRjHz0VEVPRFUGmtVEaFUZFhHxBhsotCU5JwBWEf1EWEEVHQx4UfFWYkFa2biPJiXbUta33OXFtuUXMzJ4bK3Nqay7m5NeZq6h/tPQ+xU20zugjOxR/+7/O8539+5znnwMtNTExwJtMb3L/fiLv3botCSmUjeCaejTOb39AiFothfHxcFIrHY8RksZjBsckJcOIRMfFsHD/SsbExUYpnI8DR0dGUGjSb0byhEJp5Uqg5CTSzc2CQleJbMEj9/ywBcGRkJEk9DQqouEVQT1sK444yWI9UonmTjGqauVLEIlHa9x8lAMbj8SSpp0rwKGMVvg8P46vbg0C7na8z8JsMcgHe7jlEa+edRhiLy8n/TUMfu6EvLElk+U0WtGwrTrdfAGQf5J8iiK4LVzDU28t8JtMSocf8E+l68myaNFXm/6rXslLK7ay5TOunuRvZWpJuvwAYjUaTpOIWoquuAZ219RTaxKYp9BbjycoN5FvL9qH9TBX5rvoGdJythvXYSTxdtRnWylO/ZdqrLsGwszzhWQ593z2KlAwCYCQSSZJ6ehZ0W7bD9VBLgN0NCqr3qR7R2rBrL3pu3Sb/7nDlz2uy6cG0OXk0GTbZXzNp8trsPAQdTj6frlWzN2DcXZGKQQAMh8NJ6rpyHe+PnkCr/CAFdZyvpfpjuvkifLF9wIt1Wwlo0OHie1RvWrKa93RjzfzliTzPKz3ltB0/Tevmwp14wGUgHAzSOoUEwFAolFaaBSuhnslPRkJexUJtZ6v5HtUeLswl33n1BgEY5fvhs9sJ3FAiT+QYyyvoAQJuD0KBAFRTJNAuz5/s3gJgMBhMJwrVFRThM5tY5zUF/A4X1f2fvQTRLCuBreoim0YmAbqNJryvPEXeeq46kaNdkQ/1HCncbJKPs9ZSv2VHGfWsZ2hfkhKAfr8/pdxWKx4wwD69PmVfNSOL+lr2w+gYqHpWDtXt1xQ8AMlWU0e1lqLd/APRHoP8AJqWrQG9gYxcPMsvSJUvAA4MDKTUJ7MZLaVy8v+qT21tcDx/OemePr0RTkNrur4A6PP5xCgBsL+/X4wiQDpuuVxOeL1eMYmYeDY6sOp0z+B0OuHxeEQhxkJMFosJiSO/UinOI/8Pc+l7KKArAT8AAAAASUVORK5CYII=);"></span>
+  </body>
+ <style>
+    body {
+      background-color: #ddd; 
+      padding: 0;
+      margin: 0;
+    }
+    
+    .nav-main {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #ffffff;
+      display: flex;
+      flex-wrap: wrap;
+      z-index: 1000;
+    }
+    
+    .btn-toggle-nav {
+      width: 215px;
+      height: 100%;
+      background-color: #ffffff;
+    }
+    
+    .btn-toggle-nav:hover {
+      opacity: 0.5;
+      cursor: pointer;
+    }
+    
+    .btn-x {
+      display: block;
+      line-height: 30px;
+      font-family: arial;
+      font-size: 24px;
+      color: #ecf0f1;
+    }
+    .btn-toggle-nav img {
+      width:100%;
+      height:100%;
+      object-fit: cover;
+    }
+    .nav-main ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0 0 0 15px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+    .nav-main ul li {
+      list-style: none;
+      line-height: 60px;
+      letter-spacing: 3px;
+    }
+    
+    .nav-main ul li a {
+      display: block;
+      height: 100%;
+      padding: 0 10px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #2c3e50;
+      font-family: arial;
+      font-size: 16px;
+    }
+    
+    .nav-main ul li a:hover {
+      opacity: 0.5;
+      transition: all 0.1s ease-in-out;
+    }
+    
+    .nav-sidebar-s {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 50px;
+      height: calc(100vh - 60px);
+      padding: 0 5px;
+      background-color: #000000;
+      z-index: 1000;
+      transition: all 0.3s ease-in-out;
+    }
+    
+    .nav-sidebar-s ul {
+      padding: 15px 0 0 0;
+      overflow: hidden;
+      visibility: hidden;
+    }
+    
+    .nav-sidebar-s ul li {
+      list-style: none;
+    }
+    
+    .nav-sidebar-s ul li span, .nav-sidebar-s ul li a {
+      display: block;
+      line-height: 60px;
+      letter-spacing: 3px;
+      padding: 0 10px;
+      text-decoration: none;
+      text-transform: uppercase;
+      color: #ecf0f1;
+      font-family: arial;
+      font-size: 16px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+    }
+    
+    .nav-sidebar-s ul li a:hover {
+      background-color: #2c3e50;
+    }
+
+</style>
+</html>

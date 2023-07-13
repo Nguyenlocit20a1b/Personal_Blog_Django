@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+    <div class="col-md-10">
+    <div class="card">
+            {% if post.blog_img %}
+            <img class="card-img-top" src="{{post.blog_img.url}}" alt="Card image cap" style="width: 1000px height: 270px">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{post.title}}</h5>
+                <p class="card-text">{{post.body}}</p>
+                <p class="card-text"><small class="text-muted">{{post.date}}</small></p>
+                <a class="mr-2" href="{% url 'profile' %}">{{ object.author }}</a>
+                {%if object.author == request.user%}
+                <a class="btn btn-outline-success"  href = "{% url 'post-update' post.id %}" >Update</a>
+                <a class="btn btn-outline-danger"  href = "{% url 'post-delete' post.id %}">Delete</a>
+                {%endif%}
+              </div>
+        </div>
+    </div>
+    {% include 'right_bar.html' %}
+</div>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+<div class="col-md-10">
+{% for posts in posts %}
+<div class="card">
+  {% if posts.blog_img %}
+  <img class="card-img-top" src="{{posts.blog_img.url}}" alt="Card image cap" style="width: 1000px height: 270px">
+  {% endif %}
+  <div class="card-body">
+    <h5 class="card-title" ><a  href = "{% url 'post-detail' posts.id %}">{{posts.title}} </a></h5>
+    <p class="card-text">{{posts.body}}</p>
+    <div class = "row">
+      <p class="col-2 card-text"><small class="text-muted">{{posts.date|date:"M d, Y" }}</small></p>
+      <a class="col-10 card-text" href="{% url 'profile' %}"><small class="text-muted">{{ posts.author }}</small></a>
+    </div>
+
+  </div>
+</div>
+{% endfor  %} 
+  </div>
+  {% include 'right_bar.html' %}
+</div>
+</div>
+</div>
+{% endblock content %}

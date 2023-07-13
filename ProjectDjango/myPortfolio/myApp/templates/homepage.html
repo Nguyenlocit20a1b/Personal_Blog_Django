@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!--  CSS -->
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+<nav class="nav">
+  <div class="container">
+      <div class="logo">
+          <a href="#">LOC NGUYEN</a>
+      </div>
+      <div id="mainListDiv" class="main_list">
+          <ul class="">
+            <li><a href="{%url 'home'%}">Home</a></li>
+            <li><a href="{%url 'blog-home'%}">Blog</a></li>
+            <li><a href="{%url 'portfolio'%}">Portfolio</a></li>
+            <li><a href="{%url 'about'%}">About</a></li>
+            <li><a href="{%url 'contact'%}">Contact</a></li>
+            <li><a href="{%url 'podcard'%}">Podcard</a></li>
+          </ul>
+      </div>
+      <span class="navTrigger">
+          <i></i>
+          <i></i>
+          <i></i>
+      </span>
+  </div>
+</nav>
+<body>
+  <!-- Header -->
+  <section class="home">
+  </section>
+  <div style="height: 800px">
+    <!-- just to make scrolling effect possible -->
+  <h2 class="myH2">Đây là gì ?</h2>
+  <p class="myP">Xin chào các anh chị và các bạn !!! </p>
+  <p class="myP">Đây là trang blog cá nhân của tôi,nếu có góp ý về những vấn đề trải nghiệm của bạn vui lòng để lại lời nhắn (<a href="https://www.facebook.com/nguyenlocIT1510.net">https://www.facebook.com/nguyenlocIT1510.net</a>)
+  and Dicson <a href="https://codepen.io/dicson/pen/waKPgQ">(https://codepen.io/dicson/pen/waKPgQ)</a></p>
+  <p class="myP">I HOPE YOU FIND THIS USEFULL</p>
+  <p class="myP">NGUYỄN ĐÌNH LỘC</p>
+    <p class="myP">
+    Tôi tạo nên trang web này nhằm chia sẻ đến quý anh chị và các bạn những câu chuyện cuộc sống của tôi và rồi từ đó các anh chị có thể 
+    rút ra những bài học riêng cho bản thân mình. Những câu chuyện mà tôi chia sẻ mang tính chất tham khảo và giải trí và hơn nữa nó hoàn
+    toàn là những câu chuyện trong thực tế mà tôi từng trải qua. Mong quý anh chị góp ý để blog này mang nhiều giá trị đến mọi người hơn.
+  </p>
+</div>
+
+
+  <script>
+    $(window).scroll(function() {
+        if ($(document).scrollTop() > 50) {
+            $('.nav').addClass('affix');
+            console.log("OK");
+        } else {
+            $('.nav').removeClass('affix');
+        }
+    });
+    $('.navTrigger').click(function () {
+      $(this).toggleClass('active');
+      console.log("Clicked menu");
+      $("#mainListDiv").toggleClass("show_list");
+      $("#mainListDiv").fadeIn();
+  
+  });   
+</script>
+</html>
+
+
+
